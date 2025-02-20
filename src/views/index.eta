@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+  <head></head>
+  <body>
+    <h1>HELLO <%= it.name %></h1>
+  </body>
+</!DOCTYPE>
