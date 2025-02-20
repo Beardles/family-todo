@@ -1,6 +1,11 @@
 <!DOCTYPE html>
-  <head></head>
+  <head>
+    <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous">
+    </script>
+</head>
   <body>
     <h1>HELLO <%= it.name %></h1>
+  <button hx-get="/api/v1/todos" hx-target="#todos">Get Todos</button>
+  <div id="todos"></div>
   </body>
 </!DOCTYPE>

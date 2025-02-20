@@ -4,6 +4,6 @@ import { router as TodoRouter } from "./todo.ts";
 
 const router = new Router();
 
-router.use("/api/v2", TodoRouter.routes(), TodoRouter.allowedMethods());
+router.use("/api/v1", TodoRouter.routes(), TodoRouter.allowedMethods());
 
 export { router };
