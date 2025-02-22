@@ -8,6 +8,20 @@
       "when": 1740101086722,
       "tag": "0000_optimal_jocasta",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1740249208028,
+      "tag": "0001_elite_tana_nile",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1740249324491,
+      "tag": "0002_swift_tomas",
+      "breakpoints": true
     }
   ]
 }
