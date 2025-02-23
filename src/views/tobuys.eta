@@ -1,0 +1,4 @@
+<% layout("./partials/_app_shell") %>
+
+<h1>TOBUYS</h1>
+

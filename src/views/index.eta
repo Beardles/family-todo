@@ -1,5 +1,5 @@
-<% layout("./layouts/_app_shell") %>
+<% layout("./partials/_app_shell") %>
 
-<h1>HELLO <%= it.name %></h1>
+<h1>TODOS</h1>
 <button hx-get="/api/v1/todos" hx-target="#todos">Get Todos</button>
 <div id="todos"></div>
