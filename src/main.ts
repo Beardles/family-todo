@@ -1,13 +1,11 @@
 import { Application } from "@oak/oak";
+import { useOakServer } from "@dklab/oak-routing-ctrl";
 
-import { router as ApiRouter } from "./routes/api/index.ts";
-import { router as AppRouter } from "./routes/app/index.ts";
+import { HomeController } from "./controllers/app/home.controller.ts";
+import { TodosApiController } from "./controllers/api/v1/todosApi.controller.ts";
 
 const app = new Application();
 
-app.use(AppRouter.routes());
-app.use(AppRouter.allowedMethods());
-app.use(ApiRouter.routes());
-app.use(ApiRouter.allowedMethods());
+useOakServer(app, [HomeController, TodosApiController]);
 
 await app.listen({ port: 8000 });
