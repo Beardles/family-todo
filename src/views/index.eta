@@ -1,5 +1,9 @@
 <% layout("./partials/_app_shell") %>
 
-<h1>TODOS</h1>
-<button hx-get="/api/v1/todos" hx-target="#todos">Get Todos</button>
-<div id="todos"></div>
+<h1>Todos at a glance</h1>
+
+<% it.todos.forEach((todo) => { %>
+  <div>
+    <%= todo.title %>
+  </div>
+<% }) %>

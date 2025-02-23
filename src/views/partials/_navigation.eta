@@ -1,12 +1,12 @@
 <div class="h-full p-8 flex flex-col gap-8 bg-linear-to-t from-sky-500 to-indigo-500">
-  <div hx-get="/" class="border-2 border-white cursor-pointer mb-1 text-center text-large text-white py-2 rounded-sm">
+  <div hx-get="/" hx-push-url="true" class="border-2 border-white cursor-pointer mb-1 text-center text-large text-white py-2 rounded-sm">
     T O &lt;T H I N G&gt;
   </div>
   <div class="h-px w-full border-t border-white"></div>
   <div>
-    <a href="/todos">Todos</a>
+    <a href="/todos" class="text-white">Todos</a>
   </div>
   <div>
-    <a href="/tobuys">Tobuys</a>
+    <a href="/tobuys" class="text-white">Tobuys</a>
   </div>
 </div>

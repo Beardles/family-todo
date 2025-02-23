@@ -25,7 +25,7 @@ export const todosTable = sqliteTable("todos", {
     .$type<number | null>()
     .references(() => usersTable.id)
     .default(null),
-  status: int().$type<TodoStatus>(),
+  status: int().$type<TodoStatus>().default(0),
 });
 
 export type InsertTodo = typeof todosTable.$inferInsert;

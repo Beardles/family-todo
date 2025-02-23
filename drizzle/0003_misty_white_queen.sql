@@ -1,0 +1,1 @@
+ALTER TABLE `todos` ALTER COLUMN "status" TO "status" integer DEFAULT 0;
