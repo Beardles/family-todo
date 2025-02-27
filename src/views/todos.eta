@@ -1,3 +1,4 @@
 <% layout("./partials/_app_shell") %>
 
-<h1>TODOS</h1>
+<h1 class="text-3xl">Todos</h1>
+<button class="border border-red-700">New Todo</button>

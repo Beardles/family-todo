@@ -16,8 +16,11 @@ export class RoutesController {
   }
 
   @Get("/todos")
-  todos() {
-    return eta.render("todos", {});
+  async todos() {
+    const todos = await this.todoService.getTodos();
+    return eta.render("todos", {
+      todos,
+    });
   }
 
   @Get("/tobuys")
