@@ -2,6 +2,7 @@ import { Controller, Get } from "@dklab/oak-routing-ctrl";
 
 import { eta } from "../eta.config.ts";
 import { TodoService } from "../services/todo.service.ts";
+import { getStatusText } from "../utils.ts";
 
 @Controller("/")
 export class RoutesController {
@@ -19,6 +20,7 @@ export class RoutesController {
   async todos() {
     const todos = await this.todoService.getTodos();
     return eta.render("todos", {
+      getStatusText,
       todos,
     });
   }
