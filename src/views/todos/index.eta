@@ -1,31 +1,33 @@
 <% layout("../partials/_app_shell") %>
 
-<h1 class="text-3xl mb-2">Todos</h1>
-<a href="/todos/new"class="border border-teal-500 rounded-sm flex gap-1 py-1 px-2 w-30 items-center justify-center hover:cursor-pointer">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-      <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
-    </svg>
-    New Todo
-</a>
-<div class="mt-4">
-  <table class="border-collapse border border-gray-400 w-full">
-    <thead>
-      <tr class="bg-sky-900 text-white">
-        <th class="border border-gray-300 py-2">Title</th>
-        <th class="border border-gray-300 py-2">Status</th>
-        <th class="border border-gray-300 py-2">Assignee</th>
-        <th class="border border-gray-300 py-2">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% it.todos.forEach(todo => { %>
-        <tr>
-          <td class="border border-gray-300 py-2 px-2"><%= todo.title %></td>
-          <td class="border border-gray-300 py-2 px-2"><%= it.getStatusText(todo.status) %></td>
-          <td class="border border-gray-300 py-2 px-2"><%= todo.assigned_to === null ? "Unassigned" : todo.assigned_to.name %></td>
-          <td class="border border-gray-300 py-2 px-2"><%= todo.description === null ? "" : todo.description %></td>
-        </tr> 
-      <% }) %>
-    </tbody>
-  </table>
+<div id="content">
+  <h1 class="text-3xl mb-2">Todos</h1>
+  <button hx-get="/todos/new" hx-target="#content" class="border border-teal-500 rounded-sm flex gap-1 py-1 px-2 w-30 items-center justify-center hover:cursor-pointer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+        <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+      </svg>
+      New Todo
+  </button>
+  <div class="mt-4">
+    <table class="border-collapse border border-gray-400 w-full">
+      <thead>
+        <tr class="bg-sky-900 text-white">
+          <th class="border border-gray-300 py-2">Title</th>
+          <th class="border border-gray-300 py-2">Status</th>
+          <th class="border border-gray-300 py-2">Assignee</th>
+          <th class="border border-gray-300 py-2">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% it.todos.forEach(todo => { %>
+          <tr>
+            <td class="border border-gray-300 py-2 px-2"><%= todo.title %></td>
+            <td class="border border-gray-300 py-2 px-2"><%= it.getStatusText(todo.status) %></td>
+            <td class="border border-gray-300 py-2 px-2"><%= todo.assigned_to === null ? "Unassigned" : todo.assigned_to.name %></td>
+            <td class="border border-gray-300 py-2 px-2"><%= todo.description === null ? "" : todo.description %></td>
+          </tr> 
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
 </div>

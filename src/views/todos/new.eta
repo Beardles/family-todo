@@ -1,7 +1,10 @@
-<% layout("../partials/_app_shell") %>
+<% if(it.useAppShell) { %> 
+  <% layout("../partials/_app_shell") %>
+<% } %>
+
 
 <h1 class="text-3xl mb-4">New Todo</h1>
-<form hx-boost="true" action="/todos" method="POST">
+<form method="post">
   <div>
     <div class="py-1">
       <label for="title" class="block">Title</label>
@@ -20,7 +23,7 @@
       </select>
     </div> 
     <div class="pt-2">
-      <button type="submit" class="cursor-pointer border border-teal-500 py-1 px-2 rounded-sm">Submit</button>
+      <button class="cursor-pointer border border-teal-500 py-1 px-2 rounded-sm">Submit</button>
     </div>
   </div>
 </form>

@@ -11,7 +11,6 @@ import { TodoService } from "../services/todo.service.ts";
 import { getStatusText } from "../utils.ts";
 import { NewTodoDTO } from "../dto/todo/NewTodoDTO.ts";
 import { NewTodoSchema } from "../validators/todos/new-todo.validator.ts";
-import { ZodError } from "zod";
 import { ZodIssue } from "zod";
 
 @Controller("/")
@@ -38,8 +37,9 @@ export class RoutesController {
   @Post("/todos")
   @ControllerMethodArgs("body")
   create(body: URLSearchParams, ctx: Context) {
+    const newTodoDTO = new NewTodoDTO(body);
+
     try {
-      const newTodoDTO = new NewTodoDTO(body);
       NewTodoSchema.parse(newTodoDTO);
 
       ctx.response.redirect("/todos");
@@ -49,8 +49,11 @@ export class RoutesController {
           field: issue.path[0],
           code: issue.code,
         }));
+        ctx.response.status = 500;
         return eta.render("todos/new", {
           errors,
+          prevData: newTodoDTO,
+          useAppShell: true,
         });
       }
     }
