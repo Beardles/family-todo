@@ -5,12 +5,21 @@ import {
   Get,
   Post,
 } from "@dklab/oak-routing-ctrl";
-import { ZodIssue } from "zod";
+import { z, ZodSchema } from "zod";
 
 import { eta } from "../eta.config.ts";
-import { getStatusText } from "../utils.ts";
+import { getFormData, getStatusText } from "../utils.ts";
 import { NewTodoDTO } from "../dto/todo/NewTodoDTO.ts";
 import { TodoService } from "../services/todo.service.ts";
+import { TodoStatus } from "../db/schema.ts";
+
+type NewTodoFormData = {
+  assignedTo: string;
+  description: string | null;
+  id: number;
+  status: TodoStatus;
+  title: string;
+};
 
 // There seems to be a bug with oak-routing-ctrl where, if I set this to "/todos",
 // all routes will 404. Setting it here and explicitly adding "/todos" to the methods
@@ -19,6 +28,12 @@ import { TodoService } from "../services/todo.service.ts";
 @Controller("/")
 export class TodosController {
   private readonly todoService: TodoService = new TodoService();
+  // TODO: Move this to the services?
+  private readonly newTodoInputSchema: ZodSchema = z.object({
+    assignedTo: z.nullable(z.number()),
+    description: z.nullable(z.string()),
+    title: z.string().trim().min(1, "Title is required."),
+  });
 
   @Get("/todos")
   async todos() {
@@ -32,21 +47,22 @@ export class TodosController {
   @Post("/todos")
   @ControllerMethodArgs("body")
   create(body: URLSearchParams, ctx: Context) {
-    const newTodoDTO = new NewTodoDTO(body);
+    const formData = getFormData(body) as NewTodoFormData;
 
     try {
-      newTodoDTO.validate();
+      this.newTodoInputSchema.parse({
+        assignedTo: parseInt(formData.assignedTo),
+        description: formData.description,
+        title: formData.title,
+      });
+      // const _newTodoDTO = new NewTodoDTO(body);
       ctx.response.redirect("/todos");
     } catch (e) {
       if (e.name === "ZodError") {
-        const errors = e.issues.map((issue: ZodIssue) => ({
-          field: issue.path[0],
-          code: issue.code,
-        }));
         ctx.response.status = 400;
         return eta.render("todos/new", {
-          errors,
-          prevData: newTodoDTO,
+          errors: e.format(),
+          prevData: body,
           useAppShell: true,
         });
       }

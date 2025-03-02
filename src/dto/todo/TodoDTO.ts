@@ -23,11 +23,5 @@ export class TodoDTO {
     this.id = todoDb.id as number;
     this.status = todoDb.status as TodoStatus;
     this.title = todoDb.title as string;
-
-    console.log({ todo: this });
-  }
-
-  validate() {
-    this.schema.parse(this);
   }
 }

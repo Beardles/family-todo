@@ -17,9 +17,9 @@
     <div class="py-1">
       <label for="assignedTo" class="block">Assigned To</label>
       <select name="assignedTo" id="assignedTo" class="block border px-1 py-1 rounded-sm w-3/4 cursor-pointer" >
-        <option value="Unassigned">Unassigned</option>
-        <option value="LA">LA</option>
-        <option value="Johnny">Johnny</option>
+        <option value="0">Unassigned</option>
+        <option value="1">LA</option>
+        <option value="2">Johnny</option>
       </select>
     </div> 
     <div class="pt-2">
@@ -27,7 +27,5 @@
     </div>
   </div>
 </form>
-<% if(it.errors?.length > 0) { %>
-  <%= JSON.stringify(it.errors) %>
-<% } %>
+<%= JSON.stringify(it.errors) %>
 

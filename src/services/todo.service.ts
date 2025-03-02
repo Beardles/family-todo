@@ -8,4 +8,6 @@ export class TodoService {
 
     return results.map((todoDb: SelectTodo) => new TodoDTO(todoDb));
   }
+
+  async createTodo(todoDTO: TodoDTO) {}
 }
