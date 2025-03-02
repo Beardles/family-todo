@@ -11,7 +11,6 @@ import { eta } from "../eta.config.ts";
 import { getStatusText } from "../utils.ts";
 import { NewTodoDTO } from "../dto/todo/NewTodoDTO.ts";
 import { TodoService } from "../services/todo.service.ts";
-import { NewTodoSchema } from "../validators/todos/new-todo.validator.ts";
 
 // There seems to be a bug with oak-routing-ctrl where, if I set this to "/todos",
 // all routes will 404. Setting it here and explicitly adding "/todos" to the methods
@@ -36,8 +35,7 @@ export class TodosController {
     const newTodoDTO = new NewTodoDTO(body);
 
     try {
-      NewTodoSchema.parse(newTodoDTO);
-
+      newTodoDTO.validate();
       ctx.response.redirect("/todos");
     } catch (e) {
       if (e.name === "ZodError") {

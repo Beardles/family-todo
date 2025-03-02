@@ -23,7 +23,7 @@
           <tr>
             <td class="border border-gray-300 py-2 px-2"><%= todo.title %></td>
             <td class="border border-gray-300 py-2 px-2"><%= it.getStatusText(todo.status) %></td>
-            <td class="border border-gray-300 py-2 px-2"><%= todo.assigned_to === null ? "Unassigned" : todo.assigned_to.name %></td>
+            <td class="border border-gray-300 py-2 px-2"><%= todo.assignedTo === null ? "Unassigned" : todo.assignedTo.name %></td>
             <td class="border border-gray-300 py-2 px-2"><%= todo.description === null ? "" : todo.description %></td>
           </tr> 
         <% }) %>
