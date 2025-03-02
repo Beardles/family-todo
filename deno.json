@@ -17,5 +17,8 @@
     "eta": "npm:eta@^3.5.0",
     "zod": "npm:zod@^3.24.2"
   },
-  "nodeModulesDir": "auto"
+  "nodeModulesDir": "auto",
+  "compilerOptions": {
+    "useUnknownInCatchVariables": false
+  }
 }

@@ -4,11 +4,13 @@
     </script>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   </head>
-  <body hx-boost="true" hx-target="#main" hx-select="#main" hx-swap="outerHTML">
+  <body>
     <main class="grid gap-4 grid-cols-4 h-screen">
       <%~ include("./_navigation.eta") %>
       <div id="main" class="col-span-3 h-full p-8">
-        <%~ it.body %>
+        <div class="container">
+          <%~ it.body %>
+        </div>
       </div>
     </main>
   </body>

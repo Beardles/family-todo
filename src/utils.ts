@@ -10,3 +10,13 @@ export const getStatusText = (status: TodoStatus): string => {
       return "Todo";
   }
 };
+
+export const getFormData = (data: URLSearchParams) => {
+  const obj: { [key: string]: string | number | boolean | null } = {};
+
+  for (const [key, value] of data.entries()) {
+    obj[key] = value;
+  }
+
+  return obj;
+};
