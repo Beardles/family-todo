@@ -5,25 +5,21 @@ import {
   Get,
   Post,
 } from "@dklab/oak-routing-ctrl";
-
-import { eta } from "../eta.config.ts";
-import { TodoService } from "../services/todo.service.ts";
-import { getStatusText } from "../utils.ts";
-import { NewTodoDTO } from "../dto/todo/NewTodoDTO.ts";
-import { NewTodoSchema } from "../validators/todos/new-todo.validator.ts";
 import { ZodIssue } from "zod";
 
-@Controller("/")
-export class RoutesController {
-  private readonly todoService: TodoService = new TodoService();
+import { eta } from "../eta.config.ts";
+import { getStatusText } from "../utils.ts";
+import { NewTodoDTO } from "../dto/todo/NewTodoDTO.ts";
+import { TodoService } from "../services/todo.service.ts";
+import { NewTodoSchema } from "../validators/todos/new-todo.validator.ts";
 
-  @Get("/")
-  async index() {
-    const todos = await this.todoService.getTodos();
-    return eta.render("index", {
-      todos,
-    });
-  }
+// There seems to be a bug with oak-routing-ctrl where, if I set this to "/todos",
+// all routes will 404. Setting it here and explicitly adding "/todos" to the methods
+// seems to resolve this issue.
+// TODO: Look into this more
+@Controller("/")
+export class TodosController {
+  private readonly todoService: TodoService = new TodoService();
 
   @Get("/todos")
   async todos() {
@@ -49,7 +45,7 @@ export class RoutesController {
           field: issue.path[0],
           code: issue.code,
         }));
-        ctx.response.status = 500;
+        ctx.response.status = 400;
         return eta.render("todos/new", {
           errors,
           prevData: newTodoDTO,
@@ -61,11 +57,10 @@ export class RoutesController {
 
   @Get("/todos/new")
   newTodo() {
-    return eta.render("todos/new", {});
-  }
-
-  @Get("/tobuys")
-  tobuys() {
-    return eta.render("tobuys", {});
+    return eta.render("todos/new", {
+      errors: null,
+      prevData: null,
+      useAppShell: false,
+    });
   }
 }
